@@ -1,0 +1,28 @@
+#Developers {
+    background-image: url('../../../assets/Developers_image/BG_Pattern_tower.svg');
+    background-repeat: no-repeat;
+    background-position-x: 144%;
+    background-position-y: -19px;
+    background-size: 70%;
+}
+
+#Developer_Footer {
+    background-image: url('../../../assets//Developers_image/Developers_badge_footer.svg');
+    background-repeat: no-repeat;
+   background-size: cover;
+}
+
+.swiper-button-next {
+    right: -55px !important;
+}
+
+.swiper-button-prev {
+    left: -55px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 15px !important;
+    font-weight: bold;
+}
+

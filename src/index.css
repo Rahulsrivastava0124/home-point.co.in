@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@font-face {
+  font-family: "august";
+  src: url("./assets/August\ Stories\ Serif.ttf");
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("./assets//Roboto-Regular.ttf");
+}
+
+.heading_gradient {
+  background: #fdb813;
+  background: linear-gradient(to right, #fdb813 0%, #fff1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "august";
+}
+
+.text-main {
+  color: #571078 !important;
+}
+
+.CTA {
+  background-color: #9E42CE  !important;
+  color: white !important;
+}
+
+.bg-main {
+  background-color: #571078 !important;
+}
+
+.value {
+  background: #571078 !important;
+  background: linear-gradient(to right, #571078 0%, #c9773a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  width: fit-content;
+}
+
+.value_title {
+  color: #662e04;
+}
+
+.section_background {
+  background-color: #e3dedb;
+}
+
+.Golden_btn {
+  background: #e7c873;
+}
+
+html {
+  font-family: "roboto";
+  background-color: #e3dedb;
+  scroll-behavior: smooth;
+}
+
+.august {
+  font-family: "august";
+}
+
+.roboto {
+  font-family: "roboto";
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #e0cbcb;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
+}
+
+.icon-gradient-bg {
+  background: linear-gradient(135deg, #fdb813 0%, #fff1aa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-container::-webkit-scrollbar {
+  display: none;
+}
+.marquee-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#Pattern {
+  background-image: url("./assets/launches/BG_Pattern_Fresh_new_launches.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mySwiper {
+  overflow: hidden !important;
+}

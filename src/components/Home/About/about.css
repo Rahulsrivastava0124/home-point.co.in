@@ -1,0 +1,13 @@
+#About{
+    background-image:url('../../../assets/About/BG_Pattern_1.svg'),url('../../../assets/About/BG_Pattern_2.svg');
+    background-repeat: no-repeat,no-repeat;
+    background-position-y: -123px, 424px;
+    background-position-x: -14%, 100%;
+    
+}
+
+/* #About{
+    background-image: url('../../assets/About/BG_Pattern_1\ \(1\).svg');
+    background-repeat: no-repeat;
+    object-position: 75%;
+} */

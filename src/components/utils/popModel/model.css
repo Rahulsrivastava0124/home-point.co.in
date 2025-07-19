@@ -1,0 +1,22 @@
+#Model_header {
+  background: linear-gradient(
+      180deg,
+      rgba(87, 16, 120, 1) 0%,
+      rgba(158, 106, 173, 0.69) 50%,
+      rgba(87, 16, 120, 1) 100%
+    ),
+    url("../../../assets/Model/matt-nelson-dCNGrp_0GyM-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  /* background: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(87, 16, 120, 1) 0%,
+    rgba(158, 106, 173, 0.69) 50%,
+    rgba(87, 16, 120, 1) 100%
+  ); */
+}
+
+#model {
+    background-image: url('../../../assets/Model/Form_BG_Design_footer.svg');
+}

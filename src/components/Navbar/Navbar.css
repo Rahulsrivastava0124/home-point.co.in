@@ -1,0 +1,42 @@
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  padding-bottom: 2px; /* Add some space for the underline */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #571078; /* text-main color */
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* This is for active link styling, which can be used with a router */
+.nav-link.active {
+  color: #9e42ce; /* CTA color */
+}
+
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  background-color: #9e42ce !important; /* CTA color */
+}
+
+.nav-link:active {
+  background-color: #571078 !important;
+}
+
+.nav-link:hover {
+  background-color: white;
+}

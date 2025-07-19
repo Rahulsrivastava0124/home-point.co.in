@@ -1,0 +1,17 @@
+/* .swiper-pagination-bullet {
+    background-color: #F9A602 !important;
+    width: 10px !important;
+    height: 10px !important;
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+} */
+
+
+#Reviews {
+    background-image: url('../../../assets/launches/BG_Pattern_Fresh_new_launches.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

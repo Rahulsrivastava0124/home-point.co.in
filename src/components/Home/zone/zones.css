@@ -1,0 +1,25 @@
+#zones {
+    background-image: url('../../../assets/BG_ZONE_MAP.png');
+    background-repeat: no-repeat;
+}
+
+
+.swiper-pagination-bullet {
+    width: 20px;
+    height: 5px;
+    border-radius: 2px;
+    background-color: #571078 !important;
+    opacity: 1;
+    outline: 1px solid #571078 !important;
+    outline-offset: 2px;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+
+}
+
+.swiper-pagination-bullet-active {
+    width: 40px;
+    background-color: #571078 !important;
+    outline: 2px solid #571078;
+    outline-offset: 6px;
+}

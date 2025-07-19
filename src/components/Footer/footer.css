@@ -1,0 +1,21 @@
+.footer-bg {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+
+
+.footer-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* This pattern seems to match the faint lines in the background of the image. */
+    background-image: url('../../assets/Footer/0.png'), url('../../assets/Footer/BG_Pattern_Footer.svg');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.5;
+    z-index: -2;
+}
