@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './zones.css'
 import one from '../../../assets/zones/16.jpg'
 import two from '../../../assets/zones/17.jpg'
@@ -9,7 +9,7 @@ import ZoneFotter from '../../../assets/zones/Zones_footer_badge.png'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
-
+const API_URL = import.meta.env.VITE_API_URL;
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -18,47 +18,35 @@ import 'swiper/css/pagination'
 import { Pagination, Autoplay } from 'swiper/modules'
 
 export default function Zone() {
-    const Zones = [
-        {
-            ZoneName: 'Town House',
-            Count: 3,
-            img: one
-        },
-        {
-            ZoneName: 'Modern villa',
-            Count: 2,
-            img: two
-        },
-        {
-            ZoneName: 'Apartment',
-            Count: 4,
-            img: three
-        },
-        {
-            ZoneName: 'Singal Family',
-            Count: 5,
-            img: four
-        },
-        {
-            ZoneName: 'Office ',
-            Count: 3,
-            img: five
-        }, {
-            ZoneName: 'Apartment',
-            Count: 4,
-            img: three
-        },
-        {
-            ZoneName: 'Singal Family',
-            Count: 5,
-            img: four
-        },
-        {
-            ZoneName: 'Office ',
-            Count: 3,
-            img: five
-        },
-    ]
+    const [zones, setZones] = useState([])
+
+    useEffect(() => {
+        fetch(`${API_URL}/projects/zones-launches`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data) && data.length > 0) {
+                    const allZones = data.flatMap(item => item.zones || [])
+                        .filter(zone => zone.active)
+                    // Group by title
+                    const grouped = {};
+                    allZones.forEach(zone => {
+                        if (!grouped[zone.title]) {
+                            grouped[zone.title] = {
+                                title: zone.title,
+                                count: 1,
+                                image: zone.image && zone.image[0] ? zone.image[0] : '',
+                            };
+                        } else {
+                            grouped[zone.title].count += 1;
+                        }
+                    });
+                    setZones(Object.values(grouped));
+                }
+            })
+            .catch(err => {
+                console.error('Failed to fetch zones:', err)
+            })
+    }, [])
 
     return (
         <div className='md:py-26 py-16 md:mx-10 mx-1' id="zones">
@@ -100,20 +88,18 @@ export default function Zone() {
                     className="mySwiper"
                     style={{ paddingBottom: '60px' }}
                 >
-                    {Zones.map((zone, index) => (
+                    {zones.map((zone, index) => (
                         <SwiperSlide key={index}  >
                             <div
                                 className="md:p-3 text-white w-56 md:h-72 h-54 bg-cover bg-center rounded-xl overflow-hidden flex flex-col md:justify-start mx-auto justify-end"
-                                style={{ backgroundImage: `url(${zone.img})` }}
+                                style={{ backgroundImage: `url(${zone.image})` }}
                             >
                                 <div className={`md:text-start text-end md:bg-transparent bg-no-repeat ml-16 md:ml-0 p-2 md:bg-none!`} style={{ backgroundImage: `url(${ZoneFotter})` }}>
-                                    <h1 className="text-main md:ml-3 font-bold mr-3 md:mt-5 ">{zone.ZoneName}</h1>
-                                    <p className='text-xs text-main md:text-white! md:ml-3 mr-3'>{zone.Count} Properties</p>
+                                    <h1 className="text-main md:ml-3 font-bold mr-3 md:mt-5 ">{zone.title}</h1>
+                                    <p className='text-xs text-main md:text-white! md:ml-3 mr-3'>{zone.count} Properties</p>
                                 </div>
-
                             </div>
                         </SwiperSlide>
-
                     ))}
                 </Swiper>
             </div>

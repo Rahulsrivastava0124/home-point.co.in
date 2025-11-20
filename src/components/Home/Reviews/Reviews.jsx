@@ -10,6 +10,7 @@ import './review.css';
 
 // import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
+import { useQuery } from '@tanstack/react-query';
 
 import user1 from '../../../assets/Reviews/4.jpg';
 import user2 from '../../../assets/Reviews/24.jpg';
@@ -67,6 +68,9 @@ const reviewsData = [
 
 ];
 
+// Get API_URL from Vite env, fallback to empty string for relative path
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 const logos = {
     title: "Thousands of world's leading companies trust Space",
     footer: "Bank & Financial Partners",
@@ -83,6 +87,48 @@ const logos = {
 };
 
 export default function Reviews() {
+    // Fetch payment logos from /paymentlist using React Query
+    const fetchPaymentLogos = async () => {
+        const url = API_URL ? `${API_URL}/paymentlist` : "/paymentlist";
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+    };
+
+    const { data: apiLogos, isLoading, isError } = useQuery({
+        queryKey: ["payment-logos"],
+        queryFn: fetchPaymentLogos,
+    });
+
+    // Fetch reviews from /reviews using React Query
+    const fetchReviews = async () => {
+        const url = API_URL ? `${API_URL}/reviews` : "/reviews";
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+    };
+
+    const { data: apiReviews, isLoading: isReviewsLoading, isError: isReviewsError } = useQuery({
+        queryKey: ["reviews"],
+        queryFn: fetchReviews,
+    });
+
+    // Prepare reviews to display
+    let reviewsToShow = reviewsData;
+    console.log("apiReviews", apiReviews);
+    
+    if (!isReviewsLoading && !isReviewsError && Array.isArray(apiReviews?.reviews) && apiReviews.reviews.length > 0) {
+        reviewsToShow = apiReviews.reviews.map((item) => {
+            console.log("item", item);
+            return {
+                img: item.img || user1, // fallback to user1 if no image
+                name: item.name || "Anonymous",
+                role: item.work || "Customer",
+                review: item.message || "No review text."
+            };
+        });
+    }
+
     return (
         <>
             <div className="bg-main md:py-32 py-12 md:mx-10 mb-10 rounded-3xl mx-1 px-4 sm:px-6 lg:px-8 relative overflow-hidden" id='Reviews'>
@@ -146,7 +192,7 @@ export default function Reviews() {
                         modules={[Pagination, Autoplay]}
                         className="mySwiper"
                     >
-                        {reviewsData.map((review, index) => (
+                        {reviewsToShow.map((review, index) => (
                             <SwiperSlide key={index} className='pb-10 md:my-10'>
                                 <div className="bg-white p-8  rounded-lg shadow-lg h-full relative">
                                     <div className="flex items-center  mb-4">
@@ -167,7 +213,15 @@ export default function Reviews() {
 
                 </div>
             </div>
-            <Marque logos={logos.icon} title={logos.title} footer={logos.footer} />
+            <Marque
+                logos={
+                    !isLoading && !isError && Array.isArray(apiLogos?.data?.[0]?.images) && apiLogos.data[0].images.length > 0
+                        ? apiLogos.data[0].images
+                        : logos.icon
+                }
+                title={logos.title}
+                footer={logos.footer}
+            />
         </>
     )
 }

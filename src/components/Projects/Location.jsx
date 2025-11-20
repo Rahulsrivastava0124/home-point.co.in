@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const filters = [
+const defaultFilters = [
   {
     title: "Necessities",
     items: ["Bank & ATM", "Hospitals", "Schools", "Parks", "Colleges"],
@@ -19,8 +19,15 @@ const filters = [
   },
 ];
 
-export default function Location() {
-  const [open, setOpen] = useState([true, false, false, false]);
+export default function Location({ project }) {
+  // Use project.location_categories if it exists and is an array, else fallback to defaultFilters
+  const filters =
+    Array.isArray(project.location_categories) &&
+    project.location_categories.length > 0
+      ? project.location_categories
+      : defaultFilters;
+
+  const [open, setOpen] = useState(filters.map((_, i) => i === 0));
 
   const handleToggle = (idx) => {
     setOpen((prev) => prev.map((_, i) => i === idx));
@@ -33,10 +40,10 @@ export default function Location() {
         <div className="md:w-[40%] pt-10 md:p-10 md:pl-14 flex  flex-col justify-between">
           <div className="md:ml-14 mx-auto px-6">
             <h2 className="heading_gradient md:text-4xl text-3xl august mb-2 leading-tight">
-              Emami Aastha <br /> Location Advantage
+              {project.location_section_title} <br /> Location Advantage
             </h2>
             <p className="text-white/80 mb-8 text-sm md:text-xs">
-              The perfect balance of convenience, and great connectivity,
+              {project.location_section_subtitle} || Location Advantage
             </p>
             <div className="border-l border-yellow-500/80 ">
               {filters.map((filter, idx) => (
@@ -48,7 +55,7 @@ export default function Location() {
                     <span className="mr-2 text-xl border-2 border-yellow-500/80 size-4 rounded-full p-2 flex items-center justify-center heading_gradient  ">
                       {open[idx] ? "-" : "+"}
                     </span>
-                    {filter.title}
+                    {filter.category}
                   </button>
                   {open[idx] && filter.items.length > 0 && (
                     <div className=" mt-2 text-sm">
@@ -86,16 +93,7 @@ export default function Location() {
             {/* Right Gradient Overlay */}
             <div className="absolute bottom-0 right-0 h-2/5 md:h-full md:w-24 w-full pointer-events-none z-20 bg-gradient-to-t md:bg-gradient-to-l from-[#4300827c] to-transparent"></div>
             {/* Google Maps Embed */}
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3688.354668620596!2d88.27499449999999!3d22.415672900000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0264d5eaaaaaab%3A0x13b7265aa148a63c!2sEmami%20Aastha!5e0!3m2!1sen!2sin!4v1751260910029!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Emami Aastha Location Map"
-            ></iframe>
+            <div dangerouslySetInnerHTML={{ __html: project.map_embed_url }} />
             {/* Fullscreen icon */}
             <button className="absolute top-4 right-4 CTA  p-2 rounded text-white text-xl shadow">
               <svg

@@ -4,7 +4,7 @@ import spacious from "../../assets/Projects/4.jpg";
 import peaceful from "../../assets/Projects/5.jpg";
 import metro from "../../assets/Projects/6.jpg";
 
-const highlights = [
+const defaultHighlights = [
   {
     img: prime,
     title: "Prime Location",
@@ -27,7 +27,9 @@ const highlights = [
   },
 ];
 
-export default function Highlights() {
+export default function Highlights({ project }) {
+  const data = project || defaultHighlights;
+
   return (
     <section className="section_background py-12 px-4 md:px-12 lg:px-42">
       <h2 className="text-center text-3xl md:text-4xl mx-auto august value mb-12">
@@ -35,17 +37,17 @@ export default function Highlights() {
         <span className="">Key Highlights</span>
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 md:gap-8 gap-2 gap-y-8">
-        {highlights.map((item, idx) => (
+        {data.map((item, idx) => (
           <div key={idx} className=" flex flex-col h-full">
             <img
-              src={item.img}
+              src={item.image}
               alt={item.title}
               className="w-full h-60 md:h-80 object-cover bg-center rounded-xl mb-6"
             />
             <h3 className="md:text-base text-sm font-bold text-main mb-2 roboto">
               {item.title}
             </h3>
-            <p className="value_title md:text-sm text-xs roboto pr-4">{item.desc}</p>
+            <p className="value_title md:text-sm text-xs roboto pr-4">{item.description}</p>
           </div>
         ))}
       </div>

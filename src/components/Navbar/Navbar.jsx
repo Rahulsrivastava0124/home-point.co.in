@@ -44,16 +44,17 @@ export default function Navbar() {
     },
     {
       title: "Projects",
-      subTabs: [
-        {
-          title: "zone 1",
-          link: "/projects/1",
-        },
-        {
-          title: "zone 2",
-          link: "/zone2",
-        },
-      ],
+      // subTabs: [
+      //   {
+      //     title: "zone 1",
+      //     link: "/projects/1",
+      //   },
+      //   {
+      //     title: "zone 2",
+      //     link: "/zone2",
+      //   },
+      // ],
+      link:"/projects"
     },
     {
       title: "Abouts us ",
@@ -76,6 +77,8 @@ export default function Navbar() {
       link: "/contact",
     },
   ];
+
+  const [mobileProjectsOpen, setMobileProjectsOpen] = useState(false);
 
   return (
     <div
@@ -104,10 +107,10 @@ export default function Navbar() {
           >
             {tabs.map((item, index) =>
               item.subTabs ? (
-                <li key={index} className="text-main Navlink">
+                <li key={index} className="text-main Navlink relative">
                   <details>
                     <summary className="">{item.title}</summary>
-                    <ul className="p-2">
+                    <ul className="p-2 bg-base-100 z-50 absolute left-0 mt-2 shadow-lg">
                       {item.subTabs.map((sub, subIndex) => (
                         <li key={subIndex} className="text-main">
                           <Link
@@ -190,24 +193,29 @@ export default function Navbar() {
             >
               {tabs.map((item, index) =>
                 item.subTabs ? (
-                  <li key={index} className="text-main">
-                    <details>
-                      <summary className="">{item.title}</summary>
-                      <ul className="p-2 bg-base-100">
+                  <li key={index} className="text-main relative">
+                    <button
+                      type="button"
+                      className="w-full text-left flex items-center justify-between"
+                      onClick={() => setMobileProjectsOpen((open) => !open)}
+                    >
+                      {item.title}
+                      <span>{mobileProjectsOpen ? "▲" : "▼"}</span>
+                    </button>
+                    {mobileProjectsOpen && (
+                      <ul className="p-2 bg-base-100 z-[999] absolute left-0 top-full mt-2 shadow-lg min-w-full">
                         {item.subTabs.map((sub, subIndex) => (
                           <li key={subIndex} className="text-main">
                             <Link
                               to={sub.link}
-                              className={`nav-link${
-                                location.pathname === sub.link ? " active" : ""
-                              }`}
+                              className={`nav-link${location.pathname === sub.link ? " active" : ""}`}
                             >
                               {sub.title}
                             </Link>
                           </li>
                         ))}
                       </ul>
-                    </details>
+                    )}
                   </li>
                 ) : (
                   <li key={index} className="text-main">

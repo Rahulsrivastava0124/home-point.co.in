@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import img1 from "../../assets/Projects/master.jpg";
 import img2 from "../../assets/Projects/f-1.jpg";
 import img3 from "../../assets/Projects/f-2.jpg";
@@ -67,9 +67,44 @@ const TABS = [
   },
 ];
 
-export default function Floor_Plans() {
-  const [activeTab, setActiveTab] = useState("master");
-  const tabData = TABS.find((tab) => tab.key === activeTab);
+export default function Floor_Plans({ project }) {
+  console.log("Floor_Plans", project);
+  // Dynamically generate TABS from project prop if available
+  const dynamicTabs =
+    project?.layouts?.length > 0
+      ? project.layouts.map((layout, idx) => ({
+          label: layout.name?.trim() || `Layout ${idx + 1}`,
+          key:
+            layout.name?.toLowerCase().replace(/\s+/g, "") ||
+            `layout${idx + 1}`,
+          image: layout.image?.[0] || "", // Use the first image if available
+          title: layout.name?.trim() || `Layout ${idx + 1}`,
+          subtitle: layout.name?.toLowerCase().includes("master")
+            ? "Every square foot tells a story"
+            : layout.name?.toLowerCase().includes("bhk")
+            ? `Spacious ${layout.name.trim()} for families`
+            : "Layout Plan",
+          description: layout.name?.toLowerCase().includes("master")
+            ? project.master_layout_description
+            : `The ${layout.name.trim()} offers a perfect blend of space and functionality.`,
+          details: [
+            `Carpet Area – ${layout.carpet_area}`,
+            `Saleable Area – ${layout.saleable_area}`,
+            `No. of Car Parks – ${layout.car_parks}`,
+          ],
+          pdf: project.download_pdf_url || "#",
+        }))
+      : TABS; // fallback to static TABS
+
+  // State for active tab
+  const [activeTab, setActiveTab] = useState(dynamicTabs[0]?.key || "master");
+
+  // Reset activeTab if dynamicTabs changes (e.g., when project prop updates)
+  useEffect(() => {
+    setActiveTab(dynamicTabs[0]?.key || "master");
+  }, [project, dynamicTabs.length]);
+
+  const tabData = dynamicTabs.find((tab) => tab.key === activeTab);
 
   return (
     <div className=" min-h-screen bg-white py-10 px-4 ">
@@ -86,7 +121,7 @@ export default function Floor_Plans() {
 
       {/* Tabs */}
       <div className="flex border-b border-b-fuchsia-800 mb-8 md:justify-end md:pr-26">
-        {TABS.map((tab) => (
+        {dynamicTabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
@@ -132,7 +167,7 @@ export default function Floor_Plans() {
               ))}
             </ul>
             <a
-              href={tabData.pdf}
+              href={project.download_pdf_url || "#"}
               className=" btn btn-xs text-sm w-fit py-4 rounded-lg CTA font-light shadow hover:scale-105 transition-transform duration-200"
               target="_blank"
               rel="noopener noreferrer"

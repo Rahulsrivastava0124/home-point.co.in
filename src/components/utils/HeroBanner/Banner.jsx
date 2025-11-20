@@ -1,8 +1,10 @@
 import React from "react";
 import Search from "../Search/Search";
 import CountUp from "react-countup";
+import Signature from '../../../assets/Homepoint_signature_badge.svg'
 
 export default function Banner(props) {
+  console.log("props.data", props.data);
   return (
     <div>
       <div className="md:mx-10 mx-1 md:overflow-x-hidden " id="Hero">
@@ -15,7 +17,7 @@ export default function Banner(props) {
           <img
             src={props.img}
             alt="banner img"
-            className="w-full  md:h-[88vh] h-full rounded-2xl object-cover object-[31%] "
+            className="w-full  md:h-[88vh] h-full rounded-2xl object-fill object-[31%] "
           />
           <div className="absolute md:top-30 top-12 md:left-[28%] text-wrap">
             <h1 className="text-center">
@@ -75,6 +77,15 @@ export default function Banner(props) {
                   ))
                 : null}
             </div>
+            {/* Signature Badge - right bottom corner */}
+            {props?.badge ? (<img
+              src={Signature}
+              alt="Homepoint Signature Badge"
+              className="absolute right-2 bottom-2 md:right-8 md:bottom-22 w-26 md:w-34 select-none pointer-events-none"
+              draggable="false"
+                style={{ zIndex: 10 }}
+              />
+            ) : null}
           </div>
         </div>
       </div>

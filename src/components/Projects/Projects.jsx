@@ -7,40 +7,47 @@ import Highlights from "./Highlights";
 import Location from "./Location";
 import Floor_Plans from "./Floor_Plans";
 import About from "./About";
+import { useLocation } from "react-router-dom";
+import { Gallary } from "./Gallary";
 
 export default function Projects() {
+  const loaction = useLocation();
+  const project = loaction.state.project;
+  console.log("project", project);
+
   const Data = [
     {
       title: "Price Range ",
-      value: 1.2,
+      value: project.hero.price_range.split(" ")[0],
       suffix: "Cr",
     },
     {
       title: "Configuration",
-      value: [3, 4],
+      value: project.hero.configurations.map((config) => config.bhk).join(" ").split(" ")[0],
       suffix: "BHK",
     },
     {
       title: "Land Area",
-      value: 40,
+      value: project.hero.land_area.split(" ")[0],
       suffix: "Acres",
     },
     {
       title: "Possession",
-      value: 2026,
+      value: project.hero.possession_date.split(" ")[1],
       suffix: "Dec",
     },
   ];
 
   return (
     <>
-      <Banner data={Data} search={false} img={BannerImg} />
-      <Overview />
-      <Amenities />
-      <Highlights />
-      <Location />
-      <Floor_Plans />
-      <About />
+      <Banner data={Data} search={false} img={project.hero.hero_images[0]} badge={true} />
+      <Overview project={project.overview} logo={project.project.project_logo} />
+      <Amenities project={project.amenities} />
+      <Highlights project={project.highlights} />
+      <Location project={project.location_advantage} />
+      <Floor_Plans project={project.layout_and_floorplan} />
+      <Gallary project={project.overview.overview_gallery_images} />
+      <About project={project.about} />
     </>
   );
 }

@@ -3,8 +3,39 @@ import "./contact.css";
 import mailIcon from "../../../assets/Icons/contactform_Mail.svg";
 import phoneIcon from "../../../assets/Icons/contactform_Mobile_icon.svg";
 import locationIcon from "../../../assets/Icons/contactform_Location.svg";
+import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "flowbite-react";
 
 export default function Contact() {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const {
+    data: dashboardData,
+    isLoading: isDashboardLoading,
+    isError: isDashboardError,
+  } = useQuery({
+    queryKey: ["dashboardMaster"],
+    queryFn: async () => {
+      const res = await fetch(`${API_URL}/dashboard/master`);
+      if (!res.ok) throw new Error("Network response was not ok");
+      return res.json();
+    },
+  });
+
+  console.log(dashboardData);
+  if (isDashboardLoading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+  if (isDashboardError) {
+    return (
+      <div className="text-center text-red-500 py-10">
+        Failed to load contact information.
+      </div>
+    );
+  }
   return (
     <div
       className="bg-main text-white md:mx-10 mx-1 my-10  md:py-20 py-10 px-4 rounded-3xl sm:px-8 md:px-16 lg:px-32 relative"
@@ -26,11 +57,14 @@ export default function Contact() {
             <div className="space-y-4 text-sm md:text-base">
               <div className="flex items-center gap-4">
                 <img src={mailIcon} alt="email" className="size-5" />
-                <span>dreamhomepoint@gmail.com</span>
+                <span>{dashboardData?.data?.email}</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src={phoneIcon} alt="phone" className="size-5" />
-                <span>(+91) 800 6252 000</span>
+                <span>
+                  {dashboardData?.data?.phone[0]},{" "}
+                  {dashboardData?.data?.phone[1]}
+                </span>
               </div>
               <div className="flex items-start gap-4">
                 <img
@@ -40,13 +74,13 @@ export default function Contact() {
                 />
                 <div>
                   <p className="font-semibold">Registered Office</p>
-                  <p>20A/46, Seal Lane, Kolkata, Kolkata</p>
+                  <p>{dashboardData?.data?.address.registeredOffice}</p>
                 </div>
               </div>
               <div className="ml-10">
                 <p className="font-semibold">Marketing Office</p>
-                <p>378, Rajdanga Main Road Sarat Park, Block BA -35</p>
-                <p className=" pt-4">WBRERA/A/KOL/2024/000417</p>
+                <p>{dashboardData?.data?.address.marketingOffice}</p>
+                <p className=" pt-4">{dashboardData?.data?.rera}</p>
               </div>
             </div>
           </div>
