@@ -96,7 +96,7 @@ export default function Navbar() {
         }`}
       >
         <div className="navbar-start">
-          <a href="#" className="">
+          <a href="/" className="">
             <img src={Logo} alt="logo" srcset="32 32" className="md:h-10 h-9" />
           </a>
         </div>
@@ -158,10 +158,10 @@ export default function Navbar() {
               />
             </svg>
           </a>
-          <a href="#" className="flex gap-1 items-center">
+          <a href="tel:8444099799" className="flex gap-1 items-center">
             <span className="text-nowrap text-sm text-main font-bold ">
               {" "}
-              +91 9507981942
+             +91 84440 99799
             </span>
           </a>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../index.css"; // Ensure custom styles are loaded
-import model_logo from "../../../assets/Model/1.png"
+import model_logo from "../../../assets/home_point_logo.svg"
 import price_icon from "../../../assets/Icons/unmatched_price.svg"
 import site_visit_icon from "../../../assets/Icons/site_visit.svg"
 import call_back_icon from "../../../assets/Icons/Instant_call_back.svg"

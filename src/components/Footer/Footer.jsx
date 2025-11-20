@@ -12,12 +12,13 @@ import {
 import logo from "../../assets/home_point_logo.svg"; // Assuming this is the correct path to your logo
 import "./footer.css";
 import GoTop from "../utils/GoTop";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <footer className=" mt-10 pb-4 relative font-sans">
       <div className="md:max-w-9xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 footer-bg after:bg-contain md:after:bg-contain after:bottom-0 after:bg-size-[550px] md:after:bg-size-[100%] md:after:-bottom-10">
+          <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 footer-bg after:bg-contain after:bottom-0 md:after:-bottom-10">
           <div className="flex md:flex-row justify-between md:items-center items-start pb-8 border-b border-gray-200">
             <div className="flex items-center">
               <img src={logo} alt="Home Point" className="md:h-12 h-10" />
@@ -29,18 +30,24 @@ export default function Footer() {
             <div className="flex items-center mt-2 md:mt-0 text-main">
               <p className=" mr-4 hidden md:inline">Follow Us</p>
               <div className="flex md:space-x-4 space-x-2">
-                <a href="#" className="hover:text-purple-600">
+                <a
+                  href="https://www.facebook.com/homepoint.realtors"
+                  className="hover:text-purple-600"
+                >
                   <FaFacebookF />
                 </a>
-                <a href="#" className="hover:text-purple-600">
+                {/* <a href="#" className="hover:text-purple-600">
                   <FaTwitter />
-                </a>
-                <a href="#" className="hover:text-purple-600">
+                </a> */}
+                <a
+                  href="https://www.instagram.com/homepoint_realtors"
+                  className="hover:text-purple-600"
+                >
                   <FaInstagram />
                 </a>
-                <a href="#" className="hover:text-purple-600">
+                {/* <a href="#" className="hover:text-purple-600">
                   <FaLinkedinIn />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
@@ -131,14 +138,14 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-purple-600">
+                  <Link to="/privacy" className="hover:text-purple-600">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-purple-600">
-                    Terms & Conditions
-                  </a>
+                  <Link to="/terms" className="hover:text-purple-600">
+                    Terms &amp; Conditions
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -152,12 +159,12 @@ export default function Footer() {
                     href="mailto:hi@justhome.com"
                     className="hover:text-purple-600"
                   >
-                    hi@justhome.com
+                    Info@homepoint.co.in
                   </a>
                 </li>
                 <li>
-                  <a href="tel:1234567890" className="hover:text-purple-600">
-                    (123) 456-7890
+                  <a href="tel:8444099799" className="hover:text-purple-600">
+                    +91 84440 99799
                   </a>
                 </li>
               </ul>
@@ -167,9 +174,9 @@ export default function Footer() {
             <div className="col-span-1 md:col-span-1">
               <h3 className="font-semibold value mb-4">Our Address</h3>
               <p className="text-sm text-gray-600">
-                99 Fifth Avenue, 3rd Floor
+                20A/46 Seal Lane, Tangra
                 <br />
-                San Francisco, CA 1980
+                Kolkata - 700015
               </p>
             </div>
 
