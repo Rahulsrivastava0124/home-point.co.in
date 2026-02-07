@@ -62,8 +62,8 @@ export default function Contact() {
               <div className="flex items-center gap-4">
                 <img src={phoneIcon} alt="phone" className="size-5" />
                 <span>
-                  {dashboardData?.data?.phone[0]},{" "}
-                  {dashboardData?.data?.phone[1]}
+                  {dashboardData?.data?.phone?.length === 2 &&
+                    `${dashboardData?.data?.phone[0]} , ${dashboardData?.data?.phone[1]}`}
                 </span>
               </div>
               <div className="flex items-start gap-4">
@@ -74,12 +74,12 @@ export default function Contact() {
                 />
                 <div>
                   <p className="font-semibold">Registered Office</p>
-                  <p>{dashboardData?.data?.address.registeredOffice}</p>
+                  <p>{dashboardData?.data?.address?.registeredOffice}</p>
                 </div>
               </div>
               <div className="ml-10">
                 <p className="font-semibold">Marketing Office</p>
-                <p>{dashboardData?.data?.address.marketingOffice}</p>
+                <p>{dashboardData?.data?.address?.marketingOffice}</p>
                 <p className=" pt-4">{dashboardData?.data?.rera}</p>
               </div>
             </div>

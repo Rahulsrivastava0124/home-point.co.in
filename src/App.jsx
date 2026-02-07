@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Chatbot from "./components/Chatbot/Chatbot";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Contact from "./components/Contact";
@@ -20,11 +21,13 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<ProjectsList />} />
         <Route path="/projects/:id" element={<Projects />} />
+        <Route path="/zones/:id" element={<ProjectsList />} />
         <Route path="/lpdemo" element={<LPDemo />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
       </Routes>
       <Footer />
+      <Chatbot />
     </>
   );
 }

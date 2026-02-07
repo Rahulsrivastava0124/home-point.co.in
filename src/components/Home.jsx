@@ -16,7 +16,7 @@ export default function Home() {
       <Launches />
       <About />
       <Developers />
-      <Reviews />
+      {/* <Reviews /> */}
       <Contact />
     </>
   );

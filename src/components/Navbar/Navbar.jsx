@@ -54,7 +54,7 @@ export default function Navbar() {
       //     link: "/zone2",
       //   },
       // ],
-      link:"/projects"
+      link: "/projects"
     },
     {
       title: "Abouts us ",
@@ -82,18 +82,16 @@ export default function Navbar() {
 
   return (
     <div
-      className={`w-full ${
-        isScrolled
-          ? "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
-          : "relative"
-      }`}
+      className={`w-full ${isScrolled
+        ? "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
+        : "relative"
+        }`}
     >
       <div
-        className={`navbar border-none md:px-20 px-2 ${
-          isScrolled
-            ? "bg-base-100 backdrop-blur-md bg-opacity-90 shadow-sm"
-            : "bg-transparent"
-        }`}
+        className={`navbar border-none md:px-20 px-2 ${isScrolled
+          ? "bg-base-100 backdrop-blur-md bg-opacity-90 shadow-sm"
+          : "bg-transparent"
+          }`}
       >
         <div className="navbar-start">
           <a href="/" className="">
@@ -115,9 +113,8 @@ export default function Navbar() {
                         <li key={subIndex} className="text-main">
                           <Link
                             to={sub.link}
-                            className={`nav-link${
-                              location.pathname === sub.link ? " active" : ""
-                            }`}
+                            className={`nav-link${location.pathname === sub.link ? " active" : ""
+                              }`}
                           >
                             {sub.title}
                           </Link>
@@ -130,9 +127,8 @@ export default function Navbar() {
                 <li key={index} className="text-main Navlink">
                   <Link
                     to={item.link}
-                    className={`nav-link${
-                      location.pathname === item.link ? " active" : ""
-                    }`}
+                    className={`nav-link${location.pathname === item.link ? " active" : ""
+                      }`}
                   >
                     {item.title}
                   </Link>
@@ -158,10 +154,10 @@ export default function Navbar() {
               />
             </svg>
           </a>
-          <a href="tel:8444099799" className="flex gap-1 items-center">
+          <a href="tel:8006252000" className="flex gap-1 items-center">
             <span className="text-nowrap text-sm text-main font-bold ">
               {" "}
-             +91 84440 99799
+              +91 8006252000
             </span>
           </a>
 
@@ -221,9 +217,8 @@ export default function Navbar() {
                   <li key={index} className="text-main">
                     <Link
                       to={item.link}
-                      className={`nav-link${
-                        location.pathname === item.link ? " active" : ""
-                      }`}
+                      className={`nav-link${location.pathname === item.link ? " active" : ""
+                        }`}
                     >
                       {item.title}
                     </Link>

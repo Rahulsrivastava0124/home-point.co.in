@@ -73,27 +73,27 @@ export default function Floor_Plans({ project }) {
   const dynamicTabs =
     project?.layouts?.length > 0
       ? project.layouts.map((layout, idx) => ({
-          label: layout.name?.trim() || `Layout ${idx + 1}`,
-          key:
-            layout.name?.toLowerCase().replace(/\s+/g, "") ||
-            `layout${idx + 1}`,
-          image: layout.image?.[0] || "", // Use the first image if available
-          title: layout.name?.trim() || `Layout ${idx + 1}`,
-          subtitle: layout.name?.toLowerCase().includes("master")
-            ? "Every square foot tells a story"
-            : layout.name?.toLowerCase().includes("bhk")
+        label: layout.name?.trim() || `Layout ${idx + 1}`,
+        key:
+          layout.name?.toLowerCase().replace(/\s+/g, "") ||
+          `layout${idx + 1}`,
+        image: layout.image?.[0] || "", // Use the first image if available
+        title: layout.name?.trim() || `Layout ${idx + 1}`,
+        subtitle: layout.name?.toLowerCase().includes("master")
+          ? "Every square foot tells a story"
+          : layout.name?.toLowerCase().includes("bhk")
             ? `Spacious ${layout.name.trim()} for families`
             : "Layout Plan",
-          description: layout.name?.toLowerCase().includes("master")
-            ? project.master_layout_description
-            : `The ${layout.name.trim()} offers a perfect blend of space and functionality.`,
-          details: [
-            `Carpet Area – ${layout.carpet_area}`,
-            `Saleable Area – ${layout.saleable_area}`,
-            `No. of Car Parks – ${layout.car_parks}`,
-          ],
-          pdf: project.download_pdf_url || "#",
-        }))
+        description: layout.name?.toLowerCase().includes("master")
+          ? project.master_layout_description
+          : `The ${layout.name.trim()} offers a perfect blend of space and functionality.`,
+        details: [
+          `Carpet Area – ${layout.carpet_area}`,
+          `Amount – ${layout.car_parks}`,
+          `No. of Car Parks – ${layout.saleable_area}`,
+        ],
+        pdf: project.download_pdf_url || "#",
+      }))
       : TABS; // fallback to static TABS
 
   // State for active tab
@@ -111,7 +111,7 @@ export default function Floor_Plans({ project }) {
       {/* Header */}
       <div className="mb-8 md:px-16">
         <h1 className="text-3xl md:text-4xl value august leading-tight">
-          Emami <span className="">Aastha</span> <br />
+          {/* Emami <span className="">Aastha</span> <br /> */}
           <span className="">Layout & Floor plans</span>
         </h1>
         <p className="text-xs value_title mt-2">
@@ -126,10 +126,9 @@ export default function Floor_Plans({ project }) {
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`md:px-8 px-4 py-4  text-sm md:text-lg font-semibold transition-all duration-200 focus:outline-none roboto border-b-fuchsia-800 border-r last:border-r-0
-              ${
-                activeTab === tab.key
-                  ? "bg-main text-white rounded-t-lg shadow CTA"
-                  : "text-main bg-transparent hover:bg-main/10"
+              ${activeTab === tab.key
+                ? "bg-main text-white rounded-t-lg shadow CTA"
+                : "text-main bg-transparent hover:bg-main/10"
               }`}
           >
             {tab.label}
@@ -144,7 +143,7 @@ export default function Floor_Plans({ project }) {
           <img
             src={tabData.image}
             alt={tabData.title}
-            className="w-full md:h-[60vh] h-[40vh] object-cover"
+            className="w-full md:h-[60vh] h-[40vh] p-10 object-contain"
           />
         </div>
         {/* Text Content */}

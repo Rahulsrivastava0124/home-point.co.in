@@ -69,7 +69,7 @@ export default function Privacy() {
             <h2 id="rights">Your Rights</h2>
             <p>
               You may request access to, correction of, or deletion of your
-              personal data. Contact <a href="mailto:Info@homepoint.co.in" className="text-purple-600">Info@homepoint.co.in</a> with your request.
+              personal data. Contact <a href="mailto:dreamhomepoint@gmail.com" className="text-purple-600">dreamhomepoint@gmail.com</a> with your request.
             </p>
           </section>
 
@@ -77,7 +77,7 @@ export default function Privacy() {
             <h2>Contact</h2>
             <p>
               If you have privacy questions, please email
-              <a href="mailto:Info@homepoint.co.in" className="text-purple-600"> Info@homepoint.co.in</a>.
+              <a href="mailto:dreamhomepoint@gmail.com" className="text-purple-600"> dreamhomepoint@gmail.com</a>.
             </p>
           </footer>
         </div>

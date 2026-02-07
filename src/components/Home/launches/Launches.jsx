@@ -15,6 +15,7 @@ import bath from "../../../assets/Icons/Bathroom_icon.svg";
 import area from '../../../assets/Icons/area_size_icon.svg'
 import { useQuery } from '@tanstack/react-query';
 import { FaIndianRupeeSign } from 'react-icons/fa6';
+import { Link } from 'react-router';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -39,8 +40,8 @@ export default function Launches() {
         const data = await res.json();
         // Transform data to match expected structure
         return data.map((item) => {
-            console.log(item);
             return {
+                originalData: item,
                 img: item.zones[0].image[0] || p_12,
                 type: item.type || "for sale",
                 title: item.project.project_name || "No Title",
@@ -79,6 +80,11 @@ export default function Launches() {
                     <div className="text-white text-center">Loading...</div>
                 ) : isError ? (
                     <div className="text-red-500 text-center">Failed to load launches.</div>
+                ) : !launches || launches.length === 0 ? (
+                    <div className="text-center py-16">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white august">Coming Soon</h2>
+                        <p className="text-gray-300 mt-2">New launches will be available soon!</p>
+                    </div>
                 ) : (
                     <Swiper
                         onSwiper={(swiper) => {
@@ -118,25 +124,27 @@ export default function Launches() {
                     >
                         {launches.map((item, index) => (
                             <SwiperSlide key={index} className='pb-10'>
-                                <div className='bg-white backdrop-blur-sm rounded-xl p-2 w-11/12 md:mx-auto text-main '>
-                                    <img src={item.img} alt="" className='rounded-xl h-56 lg:h-56  w-full object-cover' />
-                                    <div className=' p-2'>
-                                        <p className='px-3 py-1 absolute top-5 start-5 CTA rounded-full w-fit text-xs uppercase'>{item.type}</p>
-                                        <div className='flex justify-between items-center mt-3'>
-                                            <h2 className='font-semibold text-sm md:text-base '>{item.title}</h2>
-                                            <span className='text font-bold flex items-center'>
-                                                <FaIndianRupeeSign /> {item.price}</span>
-                                        </div>
-                                        <p className='text-main text-xs flex mt-2 items-center '>
-                                            <img src={item.licon} alt="" className='size-4 mr-1' />
-                                            {item.location}</p>
-                                        <div className='flex gap-3 mt-2'>
-                                            {item.icon.map((icon, i) => (
-                                                <p key={i} className='text-xs  border-r-1 border-gray-400 pr-2 flex justify-center items-center'> <img src={icon.img} alt="" className='size-4 mr-2' /> {icon.title}</p>
-                                            ))}
+                                <Link to={`/projects/${item.title.replace(/\s+/g, "_").toLowerCase()}`} state={{ project: item.originalData }}>
+                                    <div className='bg-white backdrop-blur-sm rounded-xl p-2 w-11/12 md:mx-auto text-main '>
+                                        <img src={item.img} alt="" className='rounded-xl h-56 lg:h-56  w-full object-cover' />
+                                        <div className=' p-2'>
+                                            <p className='px-3 py-1 absolute top-5 start-5 CTA rounded-full w-fit text-xs uppercase'>{item.type}</p>
+                                            <div className='flex justify-between items-center mt-3'>
+                                                <h2 className='font-semibold text-sm md:text-base '>{item.title}</h2>
+                                                <span className='text font-bold flex items-center'>
+                                                    <FaIndianRupeeSign /> {item.price}</span>
+                                            </div>
+                                            <p className='text-main text-xs flex mt-2 items-center '>
+                                                <img src={item.licon} alt="" className='size-4 mr-1' />
+                                                {item.location}</p>
+                                            <div className='flex gap-3 mt-2'>
+                                                {item.icon.map((icon, i) => (
+                                                    <p key={i} className='text-xs  border-r-1 border-gray-400 pr-2 flex justify-center items-center'> <img src={icon.img} alt="" className='size-4 mr-2' /> {icon.title}</p>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             </SwiperSlide>
                         ))}
                     </Swiper>

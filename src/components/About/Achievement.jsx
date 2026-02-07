@@ -71,22 +71,19 @@ export default function Achievement() {
             </div>
             <div className="text-white roboto md:text-sm text-xs leading-relaxed space-y-2 mt-3">
               <p>
-                A happy customer has been the only award which Somani Realtors
-                has always strived for since its inception in 1991. And awards
-                and recognition in other forms kept coming in only as a
-                by-product.
+                Every milestone we’ve reached is a reflection of the trust our clients place in us and the commitment we carry in our work.
+
               </p>
               <p>
-                Recognized today as Bengal's Most Diversified Realtor, Somani
-                Realtors has been honoured time and again by the most renowned
-                Leaders of Real Estate.
+                Since our inception in 2019, Home Point has grown steadily—from helping our very first home buyer to becoming one of Kolkata’s most trusted real estate consulting companies.
+                What truly sets us apart is not just numbers, but the relationships we’ve built along the way.
+
               </p>
               <p>
-                Multiple accolades for generating highest sales and for peerless
-                service excellence from Developers like PS Group, Merlin Group,
-                Mani Group, Siddha Group, Srijan Realty etc. speak for the
-                stupendous effort and continuous dedication that Team Somani
-                Realtors has maintained over the years.
+                🏆 Key Milestones
+                1.⁠ ⁠Best Seller in 20+ Leading Projects across Kolkata
+                2.⁠ ⁠Trusted by Hundreds of Home Buyers
+                3.⁠ ⁠Recognized Partner to Top Builders
               </p>
             </div>
           </div>

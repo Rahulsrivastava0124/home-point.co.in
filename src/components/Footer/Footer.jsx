@@ -18,7 +18,7 @@ export default function Footer() {
   return (
     <footer className=" mt-10 pb-4 relative font-sans">
       <div className="md:max-w-9xl mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 footer-bg after:bg-contain after:bottom-0 md:after:-bottom-10">
+        <div className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 footer-bg after:bg-contain after:bottom-0 md:after:-bottom-10">
           <div className="flex md:flex-row justify-between md:items-center items-start pb-8 border-b border-gray-200">
             <div className="flex items-center">
               <img src={logo} alt="Home Point" className="md:h-12 h-10" />
@@ -159,12 +159,12 @@ export default function Footer() {
                     href="mailto:hi@justhome.com"
                     className="hover:text-purple-600"
                   >
-                    Info@homepoint.co.in
+                    dreamhomepoint@gmail.com
                   </a>
                 </li>
                 <li>
-                  <a href="tel:8444099799" className="hover:text-purple-600">
-                    +91 84440 99799
+                  <a href="tel:8006252000" className="hover:text-purple-600">
+                    +91 8006252000
                   </a>
                 </li>
               </ul>

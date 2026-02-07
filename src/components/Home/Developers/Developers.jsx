@@ -124,8 +124,8 @@ export default function Developers() {
         logos={
           !isLoading &&
           !isError &&
-          Array.isArray(apiLogos.data[0].images) &&
-          apiLogos.data[0].images.length > 0
+          Array.isArray(apiLogos?.data[0]?.images) &&
+          apiLogos?.data[0]?.images.length > 0
             ? apiLogos.data[0].images
             : null
         }
@@ -147,12 +147,17 @@ export default function Developers() {
             <div className="text-red-500 text-center">
               Failed to load launches.
             </div>
+          ) : !launches || launches.length === 0 ? (
+            <div className="text-center py-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-400 august">Coming Soon</h2>
+              <p className="text-gray-500 mt-2">New developers will be available soon!</p>
+            </div>
           ) : (
             <Swiper
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              spaceBetween={10}
+              spaceBetween={8}
               centeredSlides={false}
               loop={true}
               navigation={false}
@@ -168,15 +173,15 @@ export default function Developers() {
                 },
                 640: {
                   slidesPerView: 2,
-                  spaceBetween: 20,
+                  spaceBetween: 15,
                 },
                 768: {
                   slidesPerView: 3,
-                  spaceBetween: 30,
+                  spaceBetween: 15,
                 },
                 1024: {
                   slidesPerView: 4,
-                  spaceBetween: 30,
+                  spaceBetween: 15,
                 },
               }}
               modules={[Autoplay, Navigation, Pagination]}
@@ -204,7 +209,10 @@ export default function Developers() {
                       <p className="px-3 py-1 absolute top-5 start-5 CTA rounded-full w-fit text-xs uppercase">
                         {item.type}
                       </p>
-                      <p className="text font-bold mt-2 flex items-center gap-1"><LiaRupeeSignSolid/>{item.price}</p>
+                      <p className="text font-bold mt-2 flex items-center gap-1">
+                        <LiaRupeeSignSolid />
+                        {item.price}
+                      </p>
                       <div className="flex justify-between items-center ">
                         <h2 className="font-semibold text-sm md:text-base ">
                           {item.title}

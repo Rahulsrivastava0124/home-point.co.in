@@ -94,8 +94,8 @@ export default function Terms() {
             <h2>Contact</h2>
             <p>
               If you have questions about these Terms, please contact us at
-              <a href="mailto:Info@homepoint.co.in" className="text-purple-600">
-                Info@homepoint.co.in
+              <a href="mailto:dreamhomepoint@gmail.com" className="text-purple-600">
+                dreamhomepoint@gmail.com
               </a>
               .
             </p>
