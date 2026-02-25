@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "flowbite-react";
 import { FaIndianRupeeSign, FaLocationCrosshairs } from "react-icons/fa6";
@@ -35,23 +35,56 @@ export default function ProjectsList() {
   if (isError)
     return <div className="p-10 text-red-600">Failed to load projects.</div>;
 
+  // Format zone name for display
+  const zoneName =
+    path && path !== "projects"
+      ? path.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase())
+      : null;
+
   return (
     <div className="container mx-auto py-10 px-10">
-      <h1 className="text-3xl font-extrabold mb-8 text-center tracking-tight value august w-fit mx-auto">
-        Our Projects
-      </h1>
+      <div className="text-center mb-8">
+        {zoneName ? (
+          <>
+            <Link
+              to="/zones"
+              className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium mb-4"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Back to All Zones
+            </Link>
+            <h1 className="text-3xl font-extrabold tracking-tight value august w-fit mx-auto text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-red-600">
+              {zoneName}
+            </h1>
+            <p className="text-slate-600 mt-2">Explore projects in this zone</p>
+          </>
+        ) : (
+          <h1 className="text-3xl font-extrabold tracking-tight value august w-fit mx-auto">
+            Our Projects
+          </h1>
+        )}
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {projects
           .filter((project) => {
             if (!path || path === "projects") return true;
             return project.zones?.some(
-              (zone) =>
-                zone.title.replace(/\s+/g, "_").toLowerCase() ===
-                path
+              (zone) => zone.title.replace(/\s+/g, "_").toLowerCase() === path,
             );
           })
           .map((project) => {
-
             return (
               <div
                 key={project._id || project.id}
@@ -63,7 +96,7 @@ export default function ProjectsList() {
                       .join("-")}`,
                     {
                       state: { project },
-                    }
+                    },
                   )
                 }
               >

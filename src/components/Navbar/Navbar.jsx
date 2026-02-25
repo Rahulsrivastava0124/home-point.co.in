@@ -21,7 +21,7 @@ export default function Navbar() {
         stagger: 0.1,
       });
     },
-    { scope: NavMenu }
+    { scope: NavMenu },
   );
 
   useEffect(() => {
@@ -54,16 +54,16 @@ export default function Navbar() {
       //     link: "/zone2",
       //   },
       // ],
-      link: "/projects"
+      link: "/projects",
     },
     {
       title: "Abouts us ",
       link: "/about",
     },
-    // {
-    //   title: "Career",
-    //   link: "/career",
-    // },
+    {
+      title: "Career",
+      link: "/career",
+    },
     // {
     //   title: "Location",
     //   link: "/Location",
@@ -82,16 +82,18 @@ export default function Navbar() {
 
   return (
     <div
-      className={`w-full ${isScrolled
-        ? "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
-        : "relative"
-        }`}
+      className={`w-full ${
+        isScrolled
+          ? "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out"
+          : "relative"
+      }`}
     >
       <div
-        className={`navbar border-none md:px-20 px-2 ${isScrolled
-          ? "bg-base-100 backdrop-blur-md bg-opacity-90 shadow-sm"
-          : "bg-transparent"
-          }`}
+        className={`navbar border-none md:px-20 px-2 ${
+          isScrolled
+            ? "bg-base-100 backdrop-blur-md bg-opacity-90 shadow-sm"
+            : "bg-transparent"
+        }`}
       >
         <div className="navbar-start">
           <a href="/" className="">
@@ -113,8 +115,9 @@ export default function Navbar() {
                         <li key={subIndex} className="text-main">
                           <Link
                             to={sub.link}
-                            className={`nav-link${location.pathname === sub.link ? " active" : ""
-                              }`}
+                            className={`nav-link${
+                              location.pathname === sub.link ? " active" : ""
+                            }`}
                           >
                             {sub.title}
                           </Link>
@@ -127,13 +130,14 @@ export default function Navbar() {
                 <li key={index} className="text-main Navlink">
                   <Link
                     to={item.link}
-                    className={`nav-link${location.pathname === item.link ? " active" : ""
-                      }`}
+                    className={`nav-link${
+                      location.pathname === item.link ? " active" : ""
+                    }`}
                   >
                     {item.title}
                   </Link>
                 </li>
-              )
+              ),
             )}
           </ul>
         </div>
@@ -217,13 +221,14 @@ export default function Navbar() {
                   <li key={index} className="text-main">
                     <Link
                       to={item.link}
-                      className={`nav-link${location.pathname === item.link ? " active" : ""
-                        }`}
+                      className={`nav-link${
+                        location.pathname === item.link ? " active" : ""
+                      }`}
                     >
                       {item.title}
                     </Link>
                   </li>
-                )
+                ),
               )}
             </ul>
           </div>

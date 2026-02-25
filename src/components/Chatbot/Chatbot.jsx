@@ -168,7 +168,9 @@ const Chatbot = () => {
               </div>
               <div className="chatbot-header-text">
                 <h3>Home Point Assistant</h3>
-                <p className="online-status">Online • Usually replies instantly</p>
+                <p className="online-status">
+                  Online • Usually replies instantly
+                </p>
               </div>
             </div>
             <button

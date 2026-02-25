@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./developer.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 // import 'swiper/css/pagination';
@@ -30,6 +31,7 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 const API_URL = import.meta.env.VITE_API_URL || "";
 
 export default function Developers() {
+  const navigate = useNavigate();
   const swiperRef = useRef(null);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 768);
 
@@ -66,6 +68,7 @@ export default function Developers() {
       price: item.hero?.price_range || "$0",
       licon: location,
       location: item.overview?.overview_title || "Unknown",
+      projectData: item, // Include full project data for navigation
       icon: [
         {
           img: <FaRupeeSign />,
@@ -149,8 +152,12 @@ export default function Developers() {
             </div>
           ) : !launches || launches.length === 0 ? (
             <div className="text-center py-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-400 august">Coming Soon</h2>
-              <p className="text-gray-500 mt-2">New developers will be available soon!</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-400 august">
+                Coming Soon
+              </h2>
+              <p className="text-gray-500 mt-2">
+                New developers will be available soon!
+              </p>
             </div>
           ) : (
             <Swiper
@@ -189,7 +196,19 @@ export default function Developers() {
             >
               {launches.map((item, index) => (
                 <SwiperSlide key={index} className="pb-10 ">
-                  <div className="bg-white backdrop-blur-sm rounded-xl p-2 w-11/12 md:mx-auto text-main ml-2">
+                  <div
+                    className="bg-white backdrop-blur-sm rounded-xl p-2 w-11/12 md:mx-auto text-main ml-2 cursor-pointer transition-transform hover:scale-105"
+                    onClick={() => {
+                      if (item.projectData) {
+                        navigate(
+                          `/projects/${item.title.split(" ").join("-")}`,
+                          {
+                            state: { project: item.projectData },
+                          },
+                        );
+                      }
+                    }}
+                  >
                     <div className=" relative overflow-hidden rounded-2xl">
                       <img
                         src={item.img}
