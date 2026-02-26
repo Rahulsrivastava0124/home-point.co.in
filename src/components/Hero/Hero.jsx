@@ -4,13 +4,18 @@ import HeroImage from "../../assets/Banner_img.jpg";
 import "./Hero.css";
 import Model from "../utils/popModel/model";
 import Banner from "../utils/HeroBanner/Banner";
-import Home from "../Home";
-import { Spinner, Alert } from "flowbite-react";
+import { Alert } from "flowbite-react";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Hero() {
   const [showModal, setShowModal] = useState(false);
+  const [locationValue, setLocationValue] = useState("");
+  const [configurationValue, setConfigurationValue] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,6 +38,52 @@ export default function Hero() {
   });
 
   console.log(heroData);
+
+  const handleSearch = async () => {
+    try {
+      setIsSearching(true);
+      setSearchError("");
+      const res = await fetch(`${API_URL}/projects`);
+      if (!res.ok) throw new Error("Failed to fetch projects");
+      const data = await res.json();
+
+      const locationQuery = locationValue.trim().toLowerCase();
+      const configQuery = configurationValue.trim();
+
+      const filtered = Array.isArray(data)
+        ? data.filter((project) => {
+            const projectName = project?.project?.project_name || "";
+            const overviewTitle = project?.overview?.overview_title || "";
+            const zones = project?.zones || [];
+            const zoneMatch = zones.some((zone) =>
+              (zone?.title || "").toLowerCase().includes(locationQuery),
+            );
+            const locationMatch = locationQuery
+              ? `${projectName} ${overviewTitle}`
+                  .toLowerCase()
+                  .includes(locationQuery) || zoneMatch
+              : true;
+
+            const configMatch = configQuery
+              ? project?.hero?.configurations?.some((config) =>
+                  String(config?.bhk || "").includes(configQuery),
+                )
+              : true;
+
+            return locationMatch && configMatch;
+          })
+        : [];
+
+      setSearchResults(filtered);
+      setHasSearched(true);
+    } catch (error) {
+      setSearchError("Unable to search projects. Please try again.");
+      setSearchResults([]);
+      setHasSearched(true);
+    } finally {
+      setIsSearching(false);
+    }
+  };
 
   if (isLoading)
     return (
@@ -70,8 +121,20 @@ export default function Hero() {
       <Banner
         data={heroStats}
         search={true}
-        img={heroData.data[0].image }
+        img={heroData.data[0].image}
+        searchProps={{
+          locationValue,
+          configurationValue,
+          onLocationChange: setLocationValue,
+          onConfigurationChange: setConfigurationValue,
+          onSearch: handleSearch,
+          isSearching,
+          searchResults,
+          searchError,
+          hasSearched,
+        }}
       />
+
       {showModal && <Model onClose={() => setShowModal(false)} />}
     </>
   );

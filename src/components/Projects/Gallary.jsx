@@ -1,21 +1,30 @@
-import React, { useState } from 'react';
-import { Carousel, Modal, Button } from 'flowbite-react';
-
-console.log('Modal:', Modal, 'Button:', Button); // Debug: check if Modal and Button are undefined
+import React, { useState } from "react";
 // Fallback static images if no project.gallary is provided
-import img1 from '../../assets/Projects/1.png';
-import img2 from '../../assets/Projects/2.jpg';
-import img3 from '../../assets/Projects/3.jpg';
-import img4 from '../../assets/Projects/4.jpg';
-import img5 from '../../assets/Projects/5.jpg';
-import img6 from '../../assets/Projects/6.jpg';
-import img7 from '../../assets/Projects/7.jpg';
-import img8 from '../../assets/Projects/8.jpg';
-import img9 from '../../assets/Projects/9.jpg';
+import img1 from "../../assets/Projects/1.png";
+import img2 from "../../assets/Projects/2.jpg";
+import img3 from "../../assets/Projects/3.jpg";
+import img4 from "../../assets/Projects/4.jpg";
+import img5 from "../../assets/Projects/5.jpg";
+import img6 from "../../assets/Projects/6.jpg";
+import img7 from "../../assets/Projects/7.jpg";
+import img8 from "../../assets/Projects/8.jpg";
+import img9 from "../../assets/Projects/9.jpg";
 
 export const Gallary = ({ project }) => {
   // Use project.gallary if available, else fallback to static images
-  const images = Array.isArray(project) ? project : (project?.gallary || [img1, img2, img3, img4, img5, img6, img7, img8, img9]);
+  const images = Array.isArray(project)
+    ? project
+    : project?.gallary || [
+        img1,
+        img2,
+        img3,
+        img4,
+        img5,
+        img6,
+        img7,
+        img8,
+        img9,
+      ];
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -27,9 +36,11 @@ export const Gallary = ({ project }) => {
 
   return (
     <section className="w-full py-12 px-4 md:px-16 bg-white">
-      <h2 className="text-3xl md:text-4xl font-bold text-main mb-8 text-center august">Project Gallery</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-main mb-8 text-center august">
+        Project Gallery
+      </h2>
       {/* Featured Carousel */}
-      
+
       {/* Thumbnails Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
         {images.map((img, idx) => (
@@ -40,7 +51,7 @@ export const Gallary = ({ project }) => {
             aria-label={`Open image ${idx + 1}`}
           >
             <img
-              src={typeof img === 'string' ? img : img.default || img}
+              src={typeof img === "string" ? img : img.default || img}
               alt={`Gallery thumbnail ${idx + 1}`}
               className="rounded-xl object-cover w-full h-32 md:h-40 group-hover:scale-105 transition-transform duration-200 shadow"
               loading="lazy"
@@ -49,21 +60,27 @@ export const Gallary = ({ project }) => {
         ))}
       </div>
       {/* Modal for full image view */}
-      <Modal show={openModal} size="4xl" onClose={() => setOpenModal(false)} popup>
-        <Modal.Header />
-        <Modal.Body>
-          <div className="flex flex-col items-center">
+      {openModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] p-6 flex flex-col items-center">
             <img
-              src={typeof images[selectedIndex] === 'string' ? images[selectedIndex] : images[selectedIndex].default || images[selectedIndex]}
+              src={
+                typeof images[selectedIndex] === "string"
+                  ? images[selectedIndex]
+                  : images[selectedIndex].default || images[selectedIndex]
+              }
               alt={`Gallery full image ${selectedIndex + 1}`}
-              className="rounded-2xl object-contain max-h-[70vh] w-full"
+              className="rounded-xl object-contain max-h-[70vh] w-full"
             />
-            <Button color="purple" className="mt-6" onClick={() => setOpenModal(false)}>
+            <button
+              onClick={() => setOpenModal(false)}
+              className="mt-6 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
               Close
-            </Button>
+            </button>
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+      )}
     </section>
   );
 };

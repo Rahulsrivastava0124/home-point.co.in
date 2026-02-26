@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import D1 from '../assets/DEMO png/luxuryproject-in-sugam-morya-html-D1.png'
-import D2 from '../assets/DEMO png/howrah-projects-L2-D2.png'
-import D3 from '../assets/DEMO png/howrah-projects-L1-D3.png'
-import D4 from '../assets/DEMO png/foreshore-new-launches-L4-D4.png'
-import D5 from '../assets/DEMO png/aadvika-howrah-L1-html-D5.png'
-import D6 from '../assets/DEMO png/kolkataprojects-emami-aastha-index-html-D6.png'
-import WP1 from '../assets/DEMO png/dubairealestateexpo-WP1.png'
-import WP2 from '../assets/DEMO png/new-arunkumarjaiswal-WP2.png'
-import WP3 from '../assets/DEMO png/coachakj-WP3.png'
-import WP4 from '../assets/DEMO png/soyawala-WP4.png'
-import WP5 from '../assets/DEMO png/soyaji-WP5.png'
-import WP6 from '../assets/DEMO png/srigolokdham-WP6.png'
+
+// Placeholder images - replace with actual screenshots
+const D1 = 'https://via.placeholder.com/1200x800/4A90E2/ffffff?text=Luxury+Project+L1';
+const D2 = 'https://via.placeholder.com/1200x800/50C878/ffffff?text=Howrah+Project+L2';
+const D3 = 'https://via.placeholder.com/1200x800/FF6B6B/ffffff?text=Howrah+Project+L1';
+const D4 = 'https://via.placeholder.com/1200x800/FFA500/ffffff?text=Foreshore+Launches+L4';
+const D5 = 'https://via.placeholder.com/1200x800/9B59B6/ffffff?text=Aadvika+Howrah+L5';
+const D6 = 'https://via.placeholder.com/1200x800/E74C3C/ffffff?text=LP+with+Slide';
+const WP1 = 'https://via.placeholder.com/1200x800/3498DB/ffffff?text=Dubai+Real+Estate';
+const WP2 = 'https://via.placeholder.com/1200x800/1ABC9C/ffffff?text=Arun+Kumar+Jaiswal';
+const WP3 = 'https://via.placeholder.com/1200x800/F39C12/ffffff?text=Coach+AKJ';
+const WP4 = 'https://via.placeholder.com/1200x800/2ECC71/ffffff?text=Soyawala';
+const WP5 = 'https://via.placeholder.com/1200x800/E67E22/ffffff?text=Soyaji';
+const WP6 = 'https://via.placeholder.com/1200x800/8E44AD/ffffff?text=Sri+Golokdham';
 
 const DemoCard = ({ name, websiteUrl, pdfUrl, imageSrc, onImageClick }) => {
     return (

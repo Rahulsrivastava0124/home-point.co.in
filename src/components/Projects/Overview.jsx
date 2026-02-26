@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import emamiLogo from "../../assets/Projects/11.png"; // Update path as needed
 import img1 from "../../assets/Projects/7.jpg";
 import img2 from "../../assets/Projects/2.jpg";
 import img3 from "../../assets/Projects/3.jpg";
 import img4 from "../../assets/Projects/4.jpg";
+import EnquiryModal from "./EnquiryModal";
 
-export default function Overview({ project, logo }) {
+export default function Overview({ project, logo, projectData }) {
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+
   console.log("project", project);
+
+  const handleDownloadPDF = () => {
+    setIsEnquiryOpen(true);
+  };
+
+  const handleDownloadBrochure = () => {
+    setIsEnquiryOpen(true);
+  };
+
   return (
     <section className="section_background min-h-screen flex items-center justify-center py-12 px-4 mt-6">
       <div className="max-w-8xl w-full grid grid-cols-1 md:grid-cols-2 md:gap-16 items-center md:mx-5">
@@ -55,11 +67,29 @@ export default function Overview({ project, logo }) {
           <p className="text-xs md:text-sm value_title mb-8 text-justify">
             {project.overview_description}
           </p>
-          <button className="CTA btn rounded-xl font-bold text-sm shadow-lg transition hover:scale-105">
-            Download Brochure &rarr;
-          </button>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={handleDownloadPDF}
+              className="CTA btn rounded-xl font-bold text-sm shadow-lg transition hover:scale-105 flex-1 sm:flex-none"
+            >
+              Download PDF &rarr;
+            </button>
+            <button
+              onClick={handleDownloadBrochure}
+              className="CTA btn rounded-xl font-bold text-sm shadow-lg transition hover:scale-105 flex-1 sm:flex-none"
+            >
+              Download Brochure &rarr;
+            </button>
+          </div>
         </div>
       </div>
+
+      <EnquiryModal
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        project={projectData}
+        logo={logo}
+      />
     </section>
   );
 }

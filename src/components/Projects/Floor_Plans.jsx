@@ -67,33 +67,33 @@ const TABS = [
   },
 ];
 
-export default function Floor_Plans({ project }) {
+export default function Floor_Plans({ project, onDownloadClick }) {
   console.log("Floor_Plans", project);
   // Dynamically generate TABS from project prop if available
   const dynamicTabs =
     project?.layouts?.length > 0
       ? project.layouts.map((layout, idx) => ({
-        label: layout.name?.trim() || `Layout ${idx + 1}`,
-        key:
-          layout.name?.toLowerCase().replace(/\s+/g, "") ||
-          `layout${idx + 1}`,
-        image: layout.image?.[0] || "", // Use the first image if available
-        title: layout.name?.trim() || `Layout ${idx + 1}`,
-        subtitle: layout.name?.toLowerCase().includes("master")
-          ? "Every square foot tells a story"
-          : layout.name?.toLowerCase().includes("bhk")
-            ? `Spacious ${layout.name.trim()} for families`
-            : "Layout Plan",
-        description: layout.name?.toLowerCase().includes("master")
-          ? project.master_layout_description
-          : `The ${layout.name.trim()} offers a perfect blend of space and functionality.`,
-        details: [
-          `Carpet Area – ${layout.carpet_area}`,
-          `Amount – ${layout.car_parks}`,
-          `No. of Car Parks – ${layout.saleable_area}`,
-        ],
-        pdf: project.download_pdf_url || "#",
-      }))
+          label: layout.name?.trim() || `Layout ${idx + 1}`,
+          key:
+            layout.name?.toLowerCase().replace(/\s+/g, "") ||
+            `layout${idx + 1}`,
+          image: layout.image?.[0] || "", // Use the first image if available
+          title: layout.name?.trim() || `Layout ${idx + 1}`,
+          subtitle: layout.name?.toLowerCase().includes("master")
+            ? "Every square foot tells a story"
+            : layout.name?.toLowerCase().includes("bhk")
+              ? `Spacious ${layout.name.trim()} for families`
+              : "Layout Plan",
+          description: layout.name?.toLowerCase().includes("master")
+            ? project.master_layout_description
+            : `The ${layout.name.trim()} offers a perfect blend of space and functionality.`,
+          details: [
+            `Carpet Area – ${layout.carpet_area}`,
+            `Amount – ${layout.car_parks}`,
+            `No. of Car Parks – ${layout.saleable_area}`,
+          ],
+          pdf: project.download_pdf_url || "#",
+        }))
       : TABS; // fallback to static TABS
 
   // State for active tab
@@ -126,9 +126,10 @@ export default function Floor_Plans({ project }) {
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`md:px-8 px-4 py-4  text-sm md:text-lg font-semibold transition-all duration-200 focus:outline-none roboto border-b-fuchsia-800 border-r last:border-r-0
-              ${activeTab === tab.key
-                ? "bg-main text-white rounded-t-lg shadow CTA"
-                : "text-main bg-transparent hover:bg-main/10"
+              ${
+                activeTab === tab.key
+                  ? "bg-main text-white rounded-t-lg shadow CTA"
+                  : "text-main bg-transparent hover:bg-main/10"
               }`}
           >
             {tab.label}
@@ -165,14 +166,12 @@ export default function Floor_Plans({ project }) {
                 </li>
               ))}
             </ul>
-            <a
-              href={project.download_pdf_url || "#"}
+            <button
+              onClick={onDownloadClick}
               className=" btn btn-xs text-sm w-fit py-4 rounded-lg CTA font-light shadow hover:scale-105 transition-transform duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Download PDF &rarr;
-            </a>
+            </button>
           </div>
         </div>
       </div>

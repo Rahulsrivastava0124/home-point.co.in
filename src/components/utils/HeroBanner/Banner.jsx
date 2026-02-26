@@ -1,10 +1,10 @@
 import React from "react";
 import Search from "../Search/Search";
 import CountUp from "react-countup";
-import Signature from '../../../assets/Homepoint_signature_badge.svg'
+import Signature from "../../../assets/Homepoint_signature_badge.svg";
 
 export default function Banner(props) {
-  console.log("props.data", props.data);
+  console.log("props.data", props);
   return (
     <div>
       <div className="md:mx-10 mx-1 md:overflow-x-hidden " id="Hero">
@@ -19,33 +19,44 @@ export default function Banner(props) {
             alt="banner img"
             className="w-full  md:h-[88vh] h-full rounded-2xl object-fill object-[31%] "
           />
+          <div
+            className={`absolute inset-0 rounded-2xl ${props?.details ? "bg-gradient-to-t from-black/0 via-black/20 to-black/40" : ""}`}
+          />
           <div className="absolute md:top-30 top-12 md:left-[28%] text-wrap">
             <h1 className="text-center">
               {" "}
-              <span className="uppercase border border-[#FDB813] hidden md:inline  rounded-full p-2 text-semibold text-xs px-6 text-white">
+              <span className="uppercase border border-[#FDB813] hidden md:inline  rounded-full p-2 text-semibold text-xs px-6 text-white font-bold">
                 {" "}
-                let us guide your home
+                {props.details?.overview_subtitle || "let us guide your home"}
               </span>
             </h1>
             <h3 className="august md:mt-10 mb-4 text-4xl md:text-6xl heading_gradient text-center mx-15 md:mx-auto">
-              Find your dream house
+              {props.details?.overview_title || "Find your dream house"}
             </h3>
             <h1 className="text-center">
               {" "}
               <span className="uppercase border md:hidden border-[#FDB813]  rounded-full p-2 text-semibold text-xs px-6 text-white ">
                 {" "}
-                let us guide your home
+                {props.details?.overview_subtitle || "let us guide your home"}
               </span>
             </h1>
             <h3 className="text-center text-sm mt-3 2xl:mb-8 text-white  hidden md:block">
-              Kolkate's only Real Estate platform with{" "}
-              <span className="text-yellow-400">100+</span> highly rated sallers{" "}
+              {
+                <span>
+                  {" "}
+                  Kolkate's only Real Estate platform with{" "}
+                  <span className="text-yellow-400">100+</span> highly rated
+                  sallers{" "}
+                </span>
+              }
             </h3>
-            {props.search ? <Search /> : null}
+            {props.search ? <Search {...props.searchProps} /> : null}
 
             <h3 className="text-center text-sm mt-10 mx-14 text-white  block md:hidden">
-              Kolkate's only Real Estate platform with{" "}
-              <span className="text-yellow-400">100+</span> highly rated sallers{" "}
+              Kolkate's only Real Estate platform with
+              {" Kolkate's only Real Estate platform with "}
+              <span className="text-yellow-400">100+</span> highly rated
+              sallers{" "}
             </h3>
           </div>
           <div
@@ -65,6 +76,11 @@ export default function Banner(props) {
                         ) : (
                           <CountUp
                             end={item.value}
+                            decimals={
+                              item.value.toString().includes(".") ? 2 : 0
+                            }
+                            separator=""
+                            decimal="."
                             suffix={item.suffix}
                             duration="3"
                           />
@@ -78,11 +94,12 @@ export default function Banner(props) {
                 : null}
             </div>
             {/* Signature Badge - right bottom corner */}
-            {props?.badge ? (<img
-              src={Signature}
-              alt="Homepoint Signature Badge"
-              className="absolute right-2 bottom-2 md:right-8 md:bottom-22 w-26 md:w-34 select-none pointer-events-none"
-              draggable="false"
+            {props?.badge ? (
+              <img
+                src={Signature}
+                alt="Homepoint Signature Badge"
+                className="absolute right-2 bottom-2 md:right-8 md:bottom-22 w-26 md:w-34 select-none pointer-events-none"
+                draggable="false"
                 style={{ zIndex: 10 }}
               />
             ) : null}

@@ -91,14 +91,14 @@ export default function Launches() {
                             swiperRef.current = swiper;
                         }}
                         spaceBetween={10}
-                        centeredSlides={true}
-                        loop={true}
+                        centeredSlides={launches.length > 3}
+                        loop={launches.length > 3}
                         navigation={false}
                         pagination={!isDesktop ? { clickable: true } : false}
-                        autoplay={{
+                        autoplay={launches.length > 3 ? {
                             delay: 2200,
                             disableOnInteraction: false,
-                        }}
+                        } : false}
                         breakpoints={{
                             360: {
                                 slidesPerView: 1.1,
@@ -149,7 +149,7 @@ export default function Launches() {
                         ))}
                     </Swiper>
                 )}
-                {isDesktop && !isLoading && !isError && (
+                {isDesktop && !isLoading && !isError && launches.length > 3 && (
                     <>
                         <button
                             onClick={() => swiperRef.current?.slidePrev()}

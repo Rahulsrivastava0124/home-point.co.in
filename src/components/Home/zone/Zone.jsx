@@ -118,10 +118,10 @@ export default function Zone() {
                       {/* Details Section */}
                       <div className="p-3 bg-white">
                         <div className="flex items-center justify-between gap-2 mb-2">
-                          <h1 className="text-slate-800 font-bold text-base">
+                          <h1 className="august font-bold value text-base">
                             {zone.title}
                           </h1>
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-600 text-white">
+                          <span className="inline-flex items-center px-2  rounded-full text-xs font-semibold bg-purple-600 text-white">
                             {zone.count}
                           </span>
                         </div>
