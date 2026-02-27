@@ -107,14 +107,31 @@ export default function Hero() {
     );
 
   // Transform the API object to the array format expected by Banner
-  const heroStats = heroData && heroData.data && typeof heroData.data[0].value === 'object'
-    ? [
-        { title: 'brokerage', value: heroData.data[0].value.brokerage, suffix: '%' },
-        { title: 'Projects', value: heroData.data[0].value.projects, suffix: '+' },
-        { title: 'Developers', value: heroData.data[0].value.developers, suffix: '+' },
-        { title: 'Happy client', value: heroData.data[0].value.happyClient, suffix: '+' },
-      ]
-    : [];
+  const heroStats =
+    heroData && heroData.data && typeof heroData.data[0].value === "object"
+      ? [
+          {
+            title: "brokerage",
+            value: heroData.data[0].value.brokerage,
+            suffix: "%",
+          },
+          {
+            title: "Projects",
+            value: heroData.data[0].value.projects,
+            suffix: "+",
+          },
+          {
+            title: "Developers",
+            value: heroData.data[0].value.developers,
+            suffix: "+",
+          },
+          {
+            title: "Happy client",
+            value: heroData.data[0].value.happyClient,
+            suffix: "+",
+          },
+        ]
+      : [];
 
   return (
     <>
