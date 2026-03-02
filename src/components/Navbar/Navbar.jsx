@@ -57,6 +57,10 @@ export default function Navbar() {
       link: "/projects",
     },
     {
+      title: "Zones",
+      link: "/zones",
+    },
+    {
       title: "Abouts us ",
       link: "/about",
     },

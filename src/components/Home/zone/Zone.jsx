@@ -9,9 +9,10 @@ const API_URL = import.meta.env.VITE_API_URL;
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 // import required modules
-import { Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
 export default function Zone() {
   const [zones, setZones] = useState([]);
@@ -71,36 +72,45 @@ export default function Zone() {
         ) : (
           <Swiper
             slidesPerView={1}
-            spaceBetween={2}
-            centeredSlides={true}
+            spaceBetween={10}
+            centeredSlides={false}
             loop={true}
             autoplay={{
-              delay: 2500,
+              delay: 3000,
               disableOnInteraction: false,
+              pauseOnMouseEnter: true,
             }}
             pagination={{
               clickable: true,
+              dynamicBullets: true,
+              dynamicMainBullets: 3,
             }}
+            navigation={true}
             breakpoints={{
               360: {
-                slidesPerView: 1.3,
-                spaceBetween: -30,
+                slidesPerView: 1.5,
+                spaceBetween: 10,
+                centeredSlides: true,
               },
               640: {
                 slidesPerView: 2,
-                spaceBetween: 2,
+                spaceBetween: 15,
               },
               768: {
                 slidesPerView: 3,
-                spaceBetween: 4,
+                spaceBetween: 20,
               },
               1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              1280: {
                 slidesPerView: 5,
-                spaceBetween: 4,
+                spaceBetween: 20,
               },
             }}
-            modules={[Pagination, Autoplay]}
-            className="mySwiper"
+            modules={[Pagination, Autoplay, Navigation]}
+            className="mySwiper zones-swiper"
             style={{ paddingBottom: "60px" }}
           >
             {zones.map((zone, index) => {

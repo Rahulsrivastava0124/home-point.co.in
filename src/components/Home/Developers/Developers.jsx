@@ -71,16 +71,16 @@ export default function Developers() {
       projectData: item, // Include full project data for navigation
       icon: [
         {
-          img: <FaRupeeSign />,
-          title: item.hero?.price_range || "price_range",
+          label: "Price",
+          value: item.hero?.price_range || "N/A",
         },
         {
-          img: <FaRupeeSign />,
-          title: item.hero?.possession_date || "configurations",
+          label: "Possession",
+          value: item.hero?.possession_date || "N/A",
         },
         {
-          img: <FaRupeeSign />,
-          title: item.hero?.land_area || "land_area",
+          label: "Area",
+          value: item.hero?.land_area || "N/A",
         },
       ],
     }));
@@ -199,9 +199,9 @@ export default function Developers() {
                   <div
                     className="bg-white backdrop-blur-sm rounded-xl p-2 w-11/12 md:mx-auto text-main ml-2 cursor-pointer transition-transform hover:scale-105"
                     onClick={() => {
-                      if (item.projectData) {
+                      if (item.projectData?.project?.project_name) {
                         navigate(
-                          `/projects/${item.title.split(" ").join("-")}`,
+                          `/projects/${item.projectData.project.project_name.split(" ").join("-")}`,
                           {
                             state: { project: item.projectData },
                           },
@@ -243,19 +243,17 @@ export default function Developers() {
                       </p>
                       <div className="flex gap-3 mt-2">
                         {item.icon.map((icon, i) => (
-                          <p
+                          <div
                             key={i}
-                            className="text-xs  border-r-1 border-gray-400 pr-2 flex justify-center items-center"
+                            className="text-xs border-r border-gray-300 pr-3 last:border-r-0"
                           >
-                            {" "}
-                            <img
-                              src={icon.img}
-                              alt=""
-                              className="size-4 mr-2"
-                            />{" "}
-                            {/* {icon.img} */}
-                            {icon.title}
-                          </p>
+                            <p className="text-gray-500 text-[10px]">
+                              {icon.label}
+                            </p>
+                            <p className="font-semibold text-xs">
+                              {icon.value}
+                            </p>
+                          </div>
                         ))}
                       </div>
                     </div>
